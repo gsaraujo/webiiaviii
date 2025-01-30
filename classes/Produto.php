@@ -1,11 +1,10 @@
 <?php
 
+namespace classes;
 
-require_once "Product.php";
-require_once "config/Sql.php";
-
-class ProductDAO extends Sql
+class Produto extends \Sql
 {
+
     public function readAll() {
 
         $query = "SELECT * FROM tb_products";
@@ -20,5 +19,6 @@ class ProductDAO extends Sql
 
 
     }
+
 
 }
