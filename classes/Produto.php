@@ -1,23 +1,27 @@
 <?php
+require_once "config/Sql.php";
 
-namespace classes;
+class Produto extends Sql{
 
-class Produto extends \Sql
-{
+    private $cod_produto;
+    private $desc_produto;
+    private $valor_produto;
+    private $quantidade_estoque;
+    private $imagem_produto;
 
-    public function readAll() {
 
-        $query = "SELECT * FROM tb_products";
+    public function lerProdutos() {
+        $sql = "SELECT * FROM produtos";
         try {
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            $products = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Product', ['idproduct', 'desproduct', 'vlprice']);
-            return $products;
+            $produtos = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Produto', ['cod_produto', 'desc_produto', 'valor_produto','quantidade_estoque', 'imagem_produto']);
+            //var_dump($produtos);
+            //exit;
+            return $produtos;
         } catch (PDOException $e) {
             throw new PDOException($e);
         }
-
-
     }
 
 
